@@ -1,0 +1,62 @@
+﻿@model DesignViewModel
+
+@{
+    ViewBag.Title = "Parking Area Constructor";
+}
+
+<h2>Parking Area Constructor</h2>
+<div>
+
+</div>
+<div class="col-md-4">
+    <form class="container-fluid">
+        <div class="row">
+            <p class="alert-info">
+                To construct parking zone you have to input sides of rectangle
+                representing cell matrix of parking places and lanes.
+            </p>
+        </div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row">
+            <div class="form-group">
+                <p>Please input size of matrix:</p>
+                <label asp-for="NumOfColumns" class="control-label">Columns</label>
+                <div>
+                    <input asp-for="NumOfColumns" id="columns" class="form-control" type="number" style="max-width: 70px" min="1" value="1" />
+                    <span asp-validation-for="NumOfColumns" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumOfRows" class="control-label">Rows</label>
+                <div>
+                    <input asp-for="NumOfRows" id="rows" class="form-control" type="number" style="max-width: 70px" min="1" value="1" />
+                    <span asp-validation-for="NumOfRows" class="text-danger"></span>
+                </div>
+            </div>
+            </div>
+    </form>
+    <div>
+        <button class="js-btn-save btn btn-success" data-parking-moniker="@Model.ParkingMoniker">Save</button>
+    </div>
+    <div style="margin-top: 3px">
+        <button class="js-btn-layout btn btn-info" data-parking-moniker="@Model.ParkingMoniker">Create layout</button>
+    </div>
+    <div  style="margin-top: 23px">
+        @Html.ActionLink("Back to list", "Parkings", "Home")
+    </div>
+</div>
+
+<div class="col-md-8" id="parking-layout">
+
+</div>
+
+@section Scripts {
+   
+     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); };
+}
+
+
+
+
+

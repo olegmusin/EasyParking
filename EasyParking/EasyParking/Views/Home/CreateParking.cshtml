@@ -1,0 +1,80 @@
+@model ParkingAreaViewModel
+@{
+    ViewData["Title"] = "Create New Parking";
+}
+
+<h2>Create New Parking</h2>
+
+<div class="row">
+    <form class="container-fluid" asp-action="Create" asp-controller="Parking">
+
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Moniker" class="control-label">Parking Label</label>
+                <div>
+                    <input asp-for="Moniker" class="form-control" />
+                    <span asp-validation-for="Moniker" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParkingOwner" class="control-label">Owner</label>
+                <div>
+                    <input asp-for="ParkingOwner" class="form-control" />
+                    <span asp-validation-for="ParkingOwner" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div>
+                    <input type="submit" value="Create" class="btn btn-success" />
+                    <button class="btn btn-default" asp-action="Parkings" asp-controller="Home">Back to List</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="LocationCityTown" class="control-label">City</label>
+                <div>
+                    <input asp-for="LocationCityTown" class="form-control" />
+                    <span asp-validation-for="LocationCityTown" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="LocationCountry" class="control-label">Country</label>
+                <div>
+                    <input asp-for="LocationCountry" class="form-control" />
+                    <span asp-validation-for="LocationCountry" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="LocationAddress1" class="control-label">Address line 1</label>
+                <div>
+                    <input asp-for="LocationAddress1" class="form-control" />
+                    <span asp-validation-for="LocationAddress1" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="LocationAddress2" class="control-label">Address line 2</label>
+                <div>
+                    <input asp-for="LocationAddress2" class="form-control" />
+                    <span asp-validation-for="LocationAddress2" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="LocationAddress3" class="control-label">Address line 3</label>
+                <div>
+                    <input asp-for="LocationAddress3" class="form-control" />
+                    <span asp-validation-for="LocationAddress3" class="text-danger"></span>
+                </div>
+            </div>
+           
+        </div>
+
+    </form>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

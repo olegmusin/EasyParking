@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ParkingAreaViewModel>
+
+<div class="@Html.Raw(!Model.Any() ? "hidden" : "") ">
+    <table id="parkingslist" class="table table-hover table-responsive ">
+        <thead>
+            <tr>
+                <th>Label</th>
+                <th class="ctrtxt">Town</th>
+                <th class="ctrtxt">Address</th>
+                <th class="ctrtxt">Size</th>
+                <th class="ctrtxt">Places</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var parking in Model)
+            {
+                <tr>
+                    <td>@parking.Moniker</td>
+                    <td>@parking.LocationCityTown</td>
+                    <td>@parking.LocationAddress1</td>
+                    <td>@parking.Places.Count</td>
+                    <td>coming soon</td>
+                    <td>
+                        <a class="btn btn-success"
+                           asp-action="Design"
+                           asp-controller="Parking"
+                           asp-route-moniker="@parking.Moniker">
+                            Design Parking Area
+                        </a>
+                    </td>
+                </tr>
+            }
+    </table>
+
+</div>

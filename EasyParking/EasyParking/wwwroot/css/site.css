@@ -1,0 +1,43 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+.layout {
+    overflow: hidden;
+    margin: 3px;
+}
+.layout-base {
+    background: lightgray;
+    border-style: solid;
+    border-width: 3px;
+    border-color: black;
+    padding: 3px;
+    max-width: 1024px;
+    display: block;
+}
+.layout-row {
+    margin-bottom: -1px;
+}
+.lot-coord {
+    width: 33px;
+    height: 33px;
+    text-align: center;
+    display: inline-block;
+    margin-left: -4px;
+}
+.js-btn-lot {
+    width: 33px;
+    height: 33px;
+    display: inline-block;
+    margin-left: -4px;
+}
+.lot {
+    width: 33px;
+    height: 33px;
+    background-color:limegreen;
+}
+.lane {
+    width: 33px;
+    height: 33px;
+    background-color: gray; 
+}

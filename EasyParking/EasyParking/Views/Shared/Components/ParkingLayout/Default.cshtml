@@ -1,0 +1,63 @@
+﻿@model IEnumerable<PlaceViewModel>
+
+@{
+    ViewBag.Title = "New Layout";
+}
+<h4>Please check the places for parking lots</h4>
+<div class="container-fluid layout">
+
+    @{
+        int maxRow = 0;
+        int maxColumn = 0;
+        foreach (var lot in Model)
+        {
+            maxRow = Math.Max(maxRow, lot.Row + 1);
+            maxColumn = Math.Max(maxColumn, lot.Column + 1);
+        }
+
+
+        <div class="layout-base row">
+            @{
+                for (int i = 0; i <= maxRow; i++)
+                {
+                    <div class="layout-row">
+
+                        @for (int j = 0; j <= maxColumn; j++)
+                        {
+                            if (i == 0)
+                            {
+                                <div class="lot-coord btn">
+                                    <p>
+                                        @(j)
+                                    </p>
+                                </div>
+                            }
+                            else
+                            {
+                                if (j == 0)
+                                {
+                                    <div class="lot-coord btn">
+                                        <p>
+                                            @(i)
+                                        </p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    
+                                    <button class="js-btn-lot btn btn-default" data-row=@i data-column =@j>
+                                        
+                                    </button>
+                                    
+                                }
+                                
+                            }
+
+                        }
+                    </div>
+                }
+            }
+        </div>
+    }
+</div>
+
