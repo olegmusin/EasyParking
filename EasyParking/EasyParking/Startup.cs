@@ -6,6 +6,7 @@ using EasyParking.Domain.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Routing.Template;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -35,7 +36,7 @@ namespace EasyParking
         {
             services.AddSingleton(_config);
 
-            services.AddTransient<IMapper, Mapper>();
+            //services.AddTransient<IMapper, Mapper>();
             services.AddDbContext<ParkingDbContext>();
             services.AddTransient<IRepository, Repository<ParkingDbContext>>();
             services.AddTransient<ParkingIdentityInitializer>();
@@ -51,10 +52,11 @@ namespace EasyParking
                 cfg.AddPolicy("Users", p => p.RequireClaim("User", "True"));
             });
             //Automapper Initialization
-            services.AddAutoMapper(cfg => cfg. AddCollectionMappers());
+            services.AddAutoMapper(cfg => cfg.AddCollectionMappers());
 
             // Add framework services.
             services.AddMvc();
+            
 
 
         }
@@ -82,15 +84,8 @@ namespace EasyParking
 
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-                routes.MapRoute(
-                   name: "monikerbased",
-                   template: "{controller}/{moniker}/{action?}/{id?}");
-            });
+            app.UseMvc();
+
             seeder.Seed().Wait();
             identitySeeder.Seed().Wait();
         }

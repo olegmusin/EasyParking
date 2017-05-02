@@ -10,7 +10,7 @@
         function (e) {
             var button = $(e.target);
 
-            $.get(`/parking/${button.attr("data-parking-moniker")}/layout/`,
+            $.get(`/api/parking/${button.attr("data-parking-moniker")}/CreateLayout/`,
                 {
                     columns: columns.val(),
                     rows: rows.val()
@@ -41,10 +41,15 @@
         function (e) {
             var button = $(e.target);
             $.ajax({
-                url: `/parking/${button.attr("data-parking-moniker")}/layout/save`,
+                url: `/api/parking/${button.attr("data-parking-moniker")}/SaveLayout`,
                 type: 'POST',
                 contentType: 'application/json',
-                data: JSON.stringify(places)
+                data: JSON.stringify(places),
+                success: function(res) {
+
+                    container.html("<div>Successfully saved!</div>");
+
+                }
             });
         });
 });

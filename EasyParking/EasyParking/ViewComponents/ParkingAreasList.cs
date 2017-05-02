@@ -4,8 +4,6 @@ using EasyParking.Domain.Abstract;
 using EasyParking.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using EasyParking.Domain;
-using EasyParking.Domain.Entities;
 
 namespace EasyParking.ViewComponents
 {
@@ -31,7 +29,7 @@ namespace EasyParking.ViewComponents
             if (_repo == null)//DEBUG
                 _logger.LogError("Repository instance is null!");
             return Mapper
-                  .Map<IEnumerable<ParkingAreaViewModel>>(_repo?.GetAllParkingsWithPlaces());
+                  .Map<IEnumerable<ParkingAreaViewModel>>(_repo?.GetAllParkings());
         }
     }
 }

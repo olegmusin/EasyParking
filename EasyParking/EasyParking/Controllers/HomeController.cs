@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 namespace EasyParking.Controllers
-{
+
+{   [Route("Home/[action]")]
     public class HomeController : Controller
     {
+        [Route("")]
+        [Route("/")]
         public IActionResult Index()
         {
             return View();
@@ -33,9 +36,5 @@ namespace EasyParking.Controllers
             return View();
         }
 
-        public IActionResult CreateNewParking()
-        {
-            return View("CreateParking");
-        }
     }
 }

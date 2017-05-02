@@ -16,9 +16,10 @@ namespace EasyParking.Domain
             return GetAll<ParkingArea>(includeProperties: "Location");
         }
 
-        public IEnumerable<ParkingArea> GetAllParkingsWithPlaces()
+        public IEnumerable<Place> GetAllPlacesForParking(string moniker)
         {
-            return GetAll<ParkingArea>(includeProperties: "Location, Places");
+           return Get<Place>(pl => pl.Parking.Moniker == moniker);
         }
+
     }
 }

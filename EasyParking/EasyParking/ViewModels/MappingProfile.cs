@@ -1,4 +1,7 @@
-﻿using AutoMapper;
+﻿using System.Collections;
+using System.Collections.Generic;
+using AutoMapper;
+using AutoMapper.EquivalencyExpression;
 using EasyParking.Domain.Entities;
 using EasyParking.Dtos;
 
@@ -23,10 +26,14 @@ namespace EasyParking.ViewModels
                         Country = c.LocationCountry
                     }));
             CreateMap<Place, PlaceViewModel>().ReverseMap();
-            CreateMap<Place, PlaceDto>().ReverseMap();
+
+            CreateMap<PlaceDto, Place>()
+                .EqualityComparison((pdto, p) => pdto.Row == p.Row && pdto.Column == p.Column)
+                .ReverseMap();
+
             CreateMap<ParkingArea, DesignViewModel>()
                 .ForMember(vm => vm.ParkingMoniker, opt => opt.MapFrom(prk => prk.Moniker)).ReverseMap();
-  
+
         }
     }
 }

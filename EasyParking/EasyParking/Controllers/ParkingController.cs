@@ -1,16 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using EasyParking.Domain.Abstract;
 using EasyParking.Domain.Entities;
+using EasyParking.Dtos;
+using EasyParking.Filters;
 using EasyParking.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using EasyParking.Dtos;
 
 namespace EasyParking.Controllers
 {
-    [Route("parking")]
+    [Route("Parking/[action]")]
+    [ValidateModel]
     public class ParkingController : Controller
     {
         private readonly ILogger<ParkingController> _logger;
@@ -25,15 +29,21 @@ namespace EasyParking.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("{moniker}")]
-        public IActionResult Design(string moniker)
+
+        public IActionResult CreateNewParking()
         {
-            var parking = _repo.GetParkingByMoniker(moniker);
-            return View(_mapper.Map<DesignViewModel>(parking));
+            return View("CreateParking");
         }
 
 
-        [HttpPost]
+        [HttpGet("{moniker}")]
+        public IActionResult Design(string moniker)
+        {
+           // var parking = _repo.GetParkingByMoniker(moniker);
+            return View();
+        }     
+
+        [HttpPost("")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([FromForm] ParkingAreaViewModel model)
         {
@@ -46,30 +56,8 @@ namespace EasyParking.Controllers
             _logger.LogError($"Failed to add new parking {model.Moniker}");
             return BadRequest();
         }
-        [HttpPost("{moniker}/layout/save")]
-        public async Task<IActionResult> SaveLayout([FromBody] IEnumerable<PlaceViewModel> places, string moniker)
-        {
-            var parking = _repo.GetParkingByMoniker(moniker);
-            foreach (var pls in places)
-            {
-                parking.Places.Add(_mapper.Map<Place>(pls));
-            }
-           
-            if (ModelState.IsValid)
-            {
-                _repo.Update(parking);
-                if (await _repo.SaveAsync())
-                    return RedirectToAction("Parkings", "Home");
-            }
-            _logger.LogError($"Failed to add new parking layout for {moniker}");
-            return BadRequest();
-        }
 
-        [HttpGet("{moniker}/layout")]
-        public IActionResult CreateLayout([FromQuery] int columns, int rows)
-        {
-            return ViewComponent("ParkingLayout", new { columns, rows });
-        }
+       
     }
 
 

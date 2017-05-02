@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using EasyParking.Domain.Abstract;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using EasyParking.Domain.Entities;
 
 namespace EasyParking.Domain.Identity
 {

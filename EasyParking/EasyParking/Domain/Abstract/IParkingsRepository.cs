@@ -7,6 +7,6 @@ namespace EasyParking.Domain.Abstract
     {
         ParkingArea GetParkingByMoniker(string moniker);
         IEnumerable<ParkingArea> GetAllParkings();
-        IEnumerable<ParkingArea> GetAllParkingsWithPlaces();
+        IEnumerable<Place> GetAllPlacesForParking(string moniker);
     }
 }
