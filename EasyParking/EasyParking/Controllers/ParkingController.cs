@@ -39,9 +39,16 @@ namespace EasyParking.Controllers
         [HttpGet("{moniker}")]
         public IActionResult Design(string moniker)
         {
-           // var parking = _repo.GetParkingByMoniker(moniker);
-            return View();
-        }     
+            var parking = _repo.GetParkingByMoniker(moniker);
+            if (!parking.Places.Any())
+                return View(new DesignViewModel
+                {
+                    Columns = 0,
+                    Rows = 0,
+                    Places = new List<PlaceDto>()
+                });
+            return View(_mapper.Map<DesignViewModel>(parking));
+        }
 
         [HttpPost("")]
         [ValidateAntiForgeryToken]
@@ -57,7 +64,7 @@ namespace EasyParking.Controllers
             return BadRequest();
         }
 
-       
+
     }
 
 

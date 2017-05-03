@@ -2,6 +2,9 @@
     padding-top: 50px;
     padding-bottom: 20px;
 }
+.ctrtxt {
+    text-align: center;
+}
 .layout {
     overflow: hidden;
     margin: 3px;

@@ -8,7 +8,7 @@ using EasyParking.Domain;
 namespace EasyParking.Migrations
 {
     [DbContext(typeof(ParkingDbContext))]
-    [Migration("20170430103833_Initial")]
+    [Migration("20170503111745_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

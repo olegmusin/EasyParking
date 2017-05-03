@@ -23,13 +23,13 @@ namespace EasyParking.ViewComponents
         {
             if (columns != null && rows != null)
             {
-                return View(CreateLots(columns, rows));
+                return View("Generated",CreateLots(columns, rows));
             }
             else if (moniker != null)
             {
-                return View(GetLots(moniker));
+                return View("Saved",GetLots(moniker));
             }
-            return View();
+            return View("Generated", CreateLots(0,0));
         }
 
         private  IEnumerable<PlaceViewModel> CreateLots(int? columns, int? rows)

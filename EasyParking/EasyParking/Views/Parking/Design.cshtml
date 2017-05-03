@@ -1,4 +1,4 @@
-﻿
+﻿@model DesignViewModel
 @{
     ViewBag.Title = "Parking Area Constructor";
 }
@@ -15,40 +15,57 @@
                 representing cell matrix of parking places and lanes.
             </p>
         </div>
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div asp-validation-summary="All" class="text-danger"></div>
 
         <div class="row">
             <div class="form-group">
                 <p>Please input size of matrix:</p>
-                <label  class="control-label">Columns</label>
+                <label asp-for="Columns" class="control-label">Columns</label>
                 <div>
-                    <input id="columns" class="form-control" type="number" style="max-width: 70px" min="1" value="1" />
-                 </div>
+                    <input asp-for="Columns" id="columns" class="form-control" type="number" style="max-width: 70px" min="1"
+                           value="@Html.Raw(Model.Columns == 0 ? 1 : Model.Columns)" />
+                </div>
+                <span asp-validation-for="Columns"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">Rows</label>
+                <label asp-for="Rows" class="control-label">Rows</label>
                 <div>
-                    <input id="rows" class="form-control" type="number" style="max-width: 70px" min="1" value="1" />
-                    </div>
+                    <input asp-for="Rows" id="rows" class="form-control" type="number" style="max-width: 70px" min="1"
+                           value="@Html.Raw(Model.Rows == 0 ? 1 : Model.Rows)" />
+                </div>
+                <span asp-validation-for="Rows"></span>
             </div>
-            </div>
+        </div>
     </div>
     <div>
-        <button class="js-btn-save btn btn-success" data-parking-moniker="@ViewContext.RouteData.Values["moniker"]">Save</button>
+        <button class="js-btn-save btn btn-success"
+                data-parking-moniker="@ViewContext.RouteData.Values["moniker"]">
+            Save
+        </button>
     </div>
     <div style="margin-top: 3px">
-        <button class="js-btn-layout btn btn-info" data-parking-moniker="@ViewContext.RouteData.Values["moniker"]">Create layout</button>
+        <button class="js-btn-layout btn btn-info"
+                data-parking-moniker="@ViewContext.RouteData.Values["moniker"]">
+            Create layout
+        </button>
     </div>
-    <div  style="margin-top: 23px">
+    <div style="margin-top: 23px">
         @Html.ActionLink("Back to list", "Parkings", "Home")
     </div>
 </div>
-
-<div class="col-md-8" id="parking-layout"></div>
-
+@if (!Model.Places.Any())
+{
+    <div class="col-md-8" id="parking-layout"></div>
+}
+else
+{
+    <div class="col-md-8" id="parking-layout">
+        @await Component.InvokeAsync("ParkingLayout", new { moniker = Model.Moniker })
+    </div>
+}
 @section Scripts {
-   
-     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); };
+
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); };
 }
 
 

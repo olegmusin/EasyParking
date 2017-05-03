@@ -67,7 +67,7 @@ namespace EasyParking.Controllers.Api
             _mapper.Map(places, parking.Places);
             _repo.Update(parking);
             if (await _repo.SaveAsync())
-                return Json(new { RedirectUrl = Url.Action("Parkings","Home")});
+                return ViewComponent("ParkingLayout", new {moniker});
                
             _logger.LogError($"Failed to add new parking layout for {moniker}");
             return BadRequest();

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<PlaceViewModel>
+
+<h4>Please click once to check the places for parking lots, and double-click for lanes</h4>
+<div class="container-fluid layout">
+
+    @{
+        int maxRow = 0;
+        int maxColumn = 0;
+        foreach (var lot in Model)
+        {
+            maxRow = Math.Max(maxRow, lot.Row);
+            maxColumn = Math.Max(maxColumn, lot.Column);
+        }
+
+
+        <div class="layout-base row">
+            @{
+                for (int i = 0; i <= maxRow+1; i++)
+                {
+                    <div class="layout-row">
+
+                        @for (int j = 0; j <= maxColumn+1; j++)
+                        {
+                            if (i == 0)
+                            {
+                                <div class="lot-coord btn">
+                                    <p>
+                                        @(j)
+                                    </p>
+                                </div>
+                            }
+                            else
+                            {
+                                if (j == 0)
+                                {
+                                    <div class="lot-coord btn">
+                                        <p>
+                                            @(i)
+                                        </p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    
+                                    <button class="js-btn-lot btn btn-default" data-row=@i data-column =@j>
+                                        
+                                    </button>
+                                    
+                                }
+                                
+                            }
+
+                        }
+                    </div>
+                }
+            }
+        </div>
+    }
+</div>
+

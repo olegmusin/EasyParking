@@ -34,6 +34,17 @@ namespace EasyParking.Domain
          
         }
 
-        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Place>()
+                .HasOne(p => p.Parking)
+                .WithMany(p => p.Places)
+                .HasForeignKey(p => p.ParkingId);
+        }
+
+
+
     }
 }

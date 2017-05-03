@@ -5,9 +5,9 @@ namespace EasyParking.ViewModels
 {
     public class DesignViewModel
     {
-        public string ParkingMoniker { get; set; }
-        public int NumOfColumns { get; set; }
-        public int NumOfRows { get; set; }
-        public ICollection<PlaceDto> Lots { get; set; }
+        public string Moniker { get; set; }
+        public int Columns { get; set; }
+        public int Rows { get; set; }
+        public ICollection<PlaceDto> Places { get; set; }
     }
 }

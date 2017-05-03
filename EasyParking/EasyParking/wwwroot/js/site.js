@@ -6,6 +6,10 @@
    
     var places = [];
 
+
+
+
+
     $(".js-btn-layout").click(
         function (e) {
             var button = $(e.target);
@@ -14,12 +18,16 @@
                 {
                     columns: columns.val(),
                     rows: rows.val()
-                })
+        })
                 .done(function (data) {
                     container.html(data);
+                    columns.val(1);
+                    rows.val(1);
+                   
                 });
 
         });
+
     container.on("click", ".js-btn-lot", function () {
         var place = {};
         place.row = $(this).attr("data-row");
@@ -40,6 +48,7 @@
     $(".js-btn-save").click(
         function (e) {
             var button = $(e.target);
+            if(places.length > 0)
             $.ajax({
                 url: `/api/parking/${button.attr("data-parking-moniker")}/SaveLayout`,
                 type: 'POST',
@@ -47,7 +56,8 @@
                 data: JSON.stringify(places),
                 success: function(res) {
 
-                    container.html("<div>Successfully saved!</div>");
+
+                    container.html(res);
 
                 }
             });

@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.EquivalencyExpression;
 using EasyParking.Domain.Entities;
@@ -32,7 +34,12 @@ namespace EasyParking.ViewModels
                 .ReverseMap();
 
             CreateMap<ParkingArea, DesignViewModel>()
-                .ForMember(vm => vm.ParkingMoniker, opt => opt.MapFrom(prk => prk.Moniker)).ReverseMap();
+                .ForMember(vm => vm.Places, opt => opt.MapFrom(prk => prk.Places))
+                .ForMember(vm => vm.Columns,
+                    opt => opt.MapFrom(prk => prk.Places.Select(p => p.Column).Max()))
+                .ForMember(vm => vm.Rows,
+                    opt => opt.MapFrom(prk => prk.Places.Select(p => p.Row).Max()));
+
 
         }
     }

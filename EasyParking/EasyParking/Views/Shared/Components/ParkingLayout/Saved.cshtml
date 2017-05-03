@@ -1,21 +1,12 @@
 ﻿@model IEnumerable<PlaceViewModel>
 
-@{
-    ViewBag.Title = "New Layout";
-}
-<h4>Please check the places for parking lots</h4>
+<h4>Layout saved for @ViewContext.RouteData.Values["moniker"]</h4>
 <div class="container-fluid layout">
 
     @{
-        int maxRow = 0;
-        int maxColumn = 0;
-        foreach (var lot in Model)
-        {
-            maxRow = Math.Max(maxRow, lot.Row + 1);
-            maxColumn = Math.Max(maxColumn, lot.Column + 1);
-        }
-
-
+        var maxRow = Model.Select(p => p.Row).Max();
+        var maxColumn = Model.Select(p => p.Column).Max();
+   
         <div class="layout-base row">
             @{
                 for (int i = 0; i <= maxRow; i++)
@@ -44,13 +35,17 @@
                                 }
                                 else
                                 {
-                                    
-                                    <button class="js-btn-lot btn btn-default" data-row=@i data-column =@j>
-                                        
+
+                                    <button class="@Html.Raw(Model
+                                                  .First(l => l.Row == i && l.Column == j)
+                                                  .IsParkingAllowed ? "lot" : "lane") js-btn-lot btn btn-default" data-row=@i data-column=@j>
+                                        @Html.Raw(Model
+                                            .First(l => l.Row == i && l.Column == j)
+                                            .IsParkingAllowed ? "P" : "L")
                                     </button>
-                                    
+
                                 }
-                                
+
                             }
 
                         }

@@ -9,6 +9,8 @@ namespace EasyParking.Domain.Entities
         public bool IsParkingAllowed { get; set; }
         public int Row { get; set; }
         public int Column { get; set; }
+
+        public string ParkingId { get; set; }
         public virtual ParkingArea Parking { get; set; }
     }
 
