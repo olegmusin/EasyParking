@@ -7,9 +7,6 @@
     var places = [];
 
 
-
-
-
     $(".js-btn-layout").click(
         function (e) {
             var button = $(e.target);
@@ -28,7 +25,8 @@
 
         });
 
-    container.on("click", ".js-btn-lot", function () {
+    container.on("click", ".js-btn-lot",
+        function () {
         var place = {};
         place.row = $(this).attr("data-row");
         place.column = $(this).attr("data-column");

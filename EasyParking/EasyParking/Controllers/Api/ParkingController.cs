@@ -40,8 +40,7 @@ namespace EasyParking.Controllers.Api
         public async Task<IActionResult> SaveLayout([FromBody] IEnumerable<PlaceDto> places, string moniker)
         {
             var parking = _repo.GetParkingByMoniker(moniker);
-            var parkingPlaces = _repo.GetAllPlacesForParking(moniker);
-            var listOfParkingPlaces = parkingPlaces as IList<Place> ?? parkingPlaces.ToList();
+            var listOfParkingPlaces = parking.Places;
             if (!listOfParkingPlaces.Any())
             {
                 parking.Places = new List<Place>();
