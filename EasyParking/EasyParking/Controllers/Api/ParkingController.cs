@@ -48,7 +48,7 @@ namespace EasyParking.Controllers.Api
             else
                 try
                 {
-                    parking.Places.Clear();
+                   // parking.Places.Clear();
                     foreach (var pls in listOfParkingPlaces)
                     {
                         _repo.Delete(pls);

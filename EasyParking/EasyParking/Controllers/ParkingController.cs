@@ -54,12 +54,10 @@ namespace EasyParking.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([FromForm] ParkingAreaViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                _repo.Create(_mapper.Map<ParkingArea>(model));
-                if (await _repo.SaveAsync())
-                    return RedirectToAction("Parkings", "Home");
-            }
+            _repo.Create(_mapper.Map<ParkingArea>(model));
+            if (await _repo.SaveAsync())
+                return RedirectToAction("Parkings", "Home");
+
             _logger.LogError($"Failed to add new parking {model.Moniker}");
             return BadRequest();
         }

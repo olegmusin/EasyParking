@@ -38,7 +38,8 @@
 
                                     <button class="@Html.Raw(Model
                                                   .First(l => l.Row == i && l.Column == j)
-                                                  .IsParkingAllowed ? "lot" : "lane") js-btn-lot btn btn-default" data-row=@i data-column=@j>
+                                                       .IsParkingAllowed ? "lot" : "lane") js-btn-lot btn btn-default" 
+                                            data-row=@i data-column=@j>
                                         @Html.Raw(Model
                                             .First(l => l.Row == i && l.Column == j)
                                             .IsParkingAllowed ? "P" : "L")

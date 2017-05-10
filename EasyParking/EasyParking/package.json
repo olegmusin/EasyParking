@@ -1,0 +1,36 @@
+{
+  "name": "easy-parking",
+  "version": "1.0.0",
+  "main": "wwwroot/build/app.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/bootbox": "^4.4.32",
+    "@types/bootstrap": "^3.3.33",
+    "@types/jquery": "^2.0.43",
+    "@types/knockout": "^3.4.40",
+    "bootbox": "^4.4.0",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1",
+    "knockout": "^3.4.2",
+    "requirejs": "^2.3.3",
+    "ts-loader": "^2.0.3",
+    "typescript": "^2.3.2",
+    "webpack": "^2.5.0"
+  },
+  "-vs-binding": {
+    "BeforeBuild": [
+      "build"
+    ]
+  },
+  "dependencies": {
+    "@types/bootbox": "^4.4.32",
+    "bootbox": "^4.4.0",
+    "bootstrap": "^3.3.7"
+  }
+}

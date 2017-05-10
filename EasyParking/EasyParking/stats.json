@@ -1,0 +1,297 @@
+ts-loader: Using typescript@2.3.2 and C:\Repositories\Workspaces\EasyParking\EasyParking\EasyParking\tsconfig.json
+{
+  "errors": [
+    "bundle.js from UglifyJs\nUnexpected character '`' [bundle.js:92,18]"
+  ],
+  "warnings": [],
+  "version": "2.5.0",
+  "hash": "a955d39aa80077df87bc",
+  "time": 1187,
+  "publicPath": "",
+  "assetsByChunkName": {
+    "site": "bundle.js"
+  },
+  "assets": [
+    {
+      "name": "bundle.js",
+      "size": 4674,
+      "chunks": [
+        0
+      ],
+      "chunkNames": [
+        "site"
+      ],
+      "emitted": true
+    }
+  ],
+  "entrypoints": {
+    "site": {
+      "chunks": [
+        0
+      ],
+      "assets": [
+        "bundle.js"
+      ]
+    }
+  },
+  "chunks": [
+    {
+      "id": 0,
+      "rendered": true,
+      "initial": true,
+      "entry": true,
+      "extraAsync": false,
+      "size": 1881,
+      "names": [
+        "site"
+      ],
+      "files": [
+        "bundle.js"
+      ],
+      "hash": "c3213d60ebff77ce840f",
+      "parents": [],
+      "modules": [
+        {
+          "id": 0,
+          "identifier": "C:\\Repositories\\Workspaces\\EasyParking\\EasyParking\\EasyParking\\node_modules\\ts-loader\\index.js!C:\\Repositories\\Workspaces\\EasyParking\\EasyParking\\EasyParking\\scripts\\parkinglayout.ts",
+          "name": "./scripts/parkinglayout.ts",
+          "index": 2,
+          "index2": 1,
+          "size": 0,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "assets": [],
+          "issuer": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+          "issuerId": 2,
+          "issuerName": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+          "profile": {
+            "factory": 72,
+            "building": 1032
+          },
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "reasons": [
+            {
+              "moduleId": 2,
+              "moduleIdentifier": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+              "module": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+              "moduleName": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+              "type": "single entry",
+              "userRequest": "./scripts/parkinglayout.ts",
+              "loc": "site:100001"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": null,
+          "depth": 1,
+          "source": ""
+        },
+        {
+          "id": 1,
+          "identifier": "C:\\Repositories\\Workspaces\\EasyParking\\EasyParking\\EasyParking\\wwwroot\\js\\site.js",
+          "name": "./wwwroot/js/site.js",
+          "index": 1,
+          "index2": 0,
+          "size": 1841,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "assets": [],
+          "issuer": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+          "issuerId": 2,
+          "issuerName": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+          "profile": {
+            "factory": 28,
+            "building": 37
+          },
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "reasons": [
+            {
+              "moduleId": 2,
+              "moduleIdentifier": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+              "module": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+              "moduleName": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+              "type": "single entry",
+              "userRequest": "./wwwroot/js/site.js",
+              "loc": "site:100000"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": null,
+          "depth": 1,
+          "source": "﻿$(document).ready(function () {\r\n\r\n    var container = $(\"#parking-layout\");\r\n    var columns = $(\"#columns\");\r\n    var rows = $(\"#rows\");\r\n   \r\n    var places = [];\r\n\r\n\r\n    $(\".js-btn-layout\").click(\r\n        function (e) {\r\n            var button = $(e.target);\r\n\r\n            $.get(`/api/parking/${button.attr(\"data-parking-moniker\")}/CreateLayout/`,\r\n                {\r\n                    columns: columns.val(),\r\n                    rows: rows.val()\r\n        })\r\n                .done(function (data) {\r\n                    container.html(data);\r\n                    columns.val(1);\r\n                    rows.val(1);\r\n                   \r\n                });\r\n\r\n        });\r\n\r\n    container.on(\"click\", \".js-btn-lot\",\r\n        function () {\r\n        var place = {};\r\n        place.row = $(this).attr(\"data-row\");\r\n        place.column = $(this).attr(\"data-column\");\r\n        if ($(this).hasClass(\"lot\"))\r\n            $(this).removeClass(\"lot\").addClass(\"lane\").text(\"L\");\r\n        else\r\n            $(this).addClass(\"lot\").removeClass(\"lane\").text(\"P\");\r\n\r\n        place.IsParkingAllowed = $(this).hasClass(\"lot\");\r\n        places.push(place);\r\n        places = $.grep(places, (el) => {\r\n            return (el.row === place.row && el.column === place.column);\r\n        }, true);\r\n        places.push(place);\r\n    });\r\n\r\n    $(\".js-btn-save\").click(\r\n        function (e) {\r\n            var button = $(e.target);\r\n            if(places.length > 0)\r\n            $.ajax({\r\n                url: `/api/parking/${button.attr(\"data-parking-moniker\")}/SaveLayout`,\r\n                type: 'POST',\r\n                contentType: 'application/json',\r\n                data: JSON.stringify(places),\r\n                success: function(res) {\r\n\r\n\r\n                    container.html(res);\r\n\r\n                }\r\n            });\r\n        });\r\n});\r\n\r\n"
+        },
+        {
+          "id": 2,
+          "identifier": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+          "name": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+          "index": 0,
+          "index2": 2,
+          "size": 40,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "assets": [],
+          "issuer": null,
+          "issuerId": null,
+          "issuerName": null,
+          "profile": {
+            "factory": 0,
+            "building": 1
+          },
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "reasons": [],
+          "usedExports": true,
+          "providedExports": null,
+          "depth": 0
+        }
+      ],
+      "filteredModules": 0,
+      "origins": [
+        {
+          "moduleId": 2,
+          "module": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+          "moduleIdentifier": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+          "moduleName": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+          "loc": "",
+          "name": "site",
+          "reasons": []
+        }
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "id": 0,
+      "identifier": "C:\\Repositories\\Workspaces\\EasyParking\\EasyParking\\EasyParking\\node_modules\\ts-loader\\index.js!C:\\Repositories\\Workspaces\\EasyParking\\EasyParking\\EasyParking\\scripts\\parkinglayout.ts",
+      "name": "./scripts/parkinglayout.ts",
+      "index": 2,
+      "index2": 1,
+      "size": 0,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        0
+      ],
+      "assets": [],
+      "issuer": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+      "issuerId": 2,
+      "issuerName": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+      "profile": {
+        "factory": 72,
+        "building": 1032
+      },
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "reasons": [
+        {
+          "moduleId": 2,
+          "moduleIdentifier": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+          "module": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+          "moduleName": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+          "type": "single entry",
+          "userRequest": "./scripts/parkinglayout.ts",
+          "loc": "site:100001"
+        }
+      ],
+      "usedExports": true,
+      "providedExports": null,
+      "depth": 1,
+      "source": ""
+    },
+    {
+      "id": 1,
+      "identifier": "C:\\Repositories\\Workspaces\\EasyParking\\EasyParking\\EasyParking\\wwwroot\\js\\site.js",
+      "name": "./wwwroot/js/site.js",
+      "index": 1,
+      "index2": 0,
+      "size": 1841,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        0
+      ],
+      "assets": [],
+      "issuer": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+      "issuerId": 2,
+      "issuerName": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+      "profile": {
+        "factory": 28,
+        "building": 37
+      },
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "reasons": [
+        {
+          "moduleId": 2,
+          "moduleIdentifier": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+          "module": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+          "moduleName": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+          "type": "single entry",
+          "userRequest": "./wwwroot/js/site.js",
+          "loc": "site:100000"
+        }
+      ],
+      "usedExports": true,
+      "providedExports": null,
+      "depth": 1,
+      "source": "﻿$(document).ready(function () {\r\n\r\n    var container = $(\"#parking-layout\");\r\n    var columns = $(\"#columns\");\r\n    var rows = $(\"#rows\");\r\n   \r\n    var places = [];\r\n\r\n\r\n    $(\".js-btn-layout\").click(\r\n        function (e) {\r\n            var button = $(e.target);\r\n\r\n            $.get(`/api/parking/${button.attr(\"data-parking-moniker\")}/CreateLayout/`,\r\n                {\r\n                    columns: columns.val(),\r\n                    rows: rows.val()\r\n        })\r\n                .done(function (data) {\r\n                    container.html(data);\r\n                    columns.val(1);\r\n                    rows.val(1);\r\n                   \r\n                });\r\n\r\n        });\r\n\r\n    container.on(\"click\", \".js-btn-lot\",\r\n        function () {\r\n        var place = {};\r\n        place.row = $(this).attr(\"data-row\");\r\n        place.column = $(this).attr(\"data-column\");\r\n        if ($(this).hasClass(\"lot\"))\r\n            $(this).removeClass(\"lot\").addClass(\"lane\").text(\"L\");\r\n        else\r\n            $(this).addClass(\"lot\").removeClass(\"lane\").text(\"P\");\r\n\r\n        place.IsParkingAllowed = $(this).hasClass(\"lot\");\r\n        places.push(place);\r\n        places = $.grep(places, (el) => {\r\n            return (el.row === place.row && el.column === place.column);\r\n        }, true);\r\n        places.push(place);\r\n    });\r\n\r\n    $(\".js-btn-save\").click(\r\n        function (e) {\r\n            var button = $(e.target);\r\n            if(places.length > 0)\r\n            $.ajax({\r\n                url: `/api/parking/${button.attr(\"data-parking-moniker\")}/SaveLayout`,\r\n                type: 'POST',\r\n                contentType: 'application/json',\r\n                data: JSON.stringify(places),\r\n                success: function(res) {\r\n\r\n\r\n                    container.html(res);\r\n\r\n                }\r\n            });\r\n        });\r\n});\r\n\r\n"
+    },
+    {
+      "id": 2,
+      "identifier": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+      "name": "multi ./wwwroot/js/site.js ./scripts/parkinglayout.ts",
+      "index": 0,
+      "index2": 2,
+      "size": 40,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        0
+      ],
+      "assets": [],
+      "issuer": null,
+      "issuerId": null,
+      "issuerName": null,
+      "profile": {
+        "factory": 0,
+        "building": 1
+      },
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "reasons": [],
+      "usedExports": true,
+      "providedExports": null,
+      "depth": 0
+    }
+  ],
+  "filteredModules": 0,
+  "children": []
+}

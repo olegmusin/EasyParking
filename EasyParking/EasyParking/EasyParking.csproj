@@ -7,10 +7,18 @@
   <PropertyGroup>
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\lib\requirejs\**" />
+    <Content Remove="wwwroot\lib\requirejs\**" />
+    <EmbeddedResource Remove="wwwroot\lib\requirejs\**" />
+    <None Remove="wwwroot\lib\requirejs\**" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.0.2" />
     <PackageReference Include="AutoMapper.Collection" Version="3.0.0" />
     <PackageReference Include="Automapper.Extensions.Microsoft.DependencyInjection" Version="2.0.1" />
+    <PackageReference Include="bootbox.TypeScript.DefinitelyTyped" Version="1.2.8" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="1.1.1" />

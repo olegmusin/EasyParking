@@ -81,7 +81,7 @@ namespace EasyParking
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseIdentity();
-
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseMvc();

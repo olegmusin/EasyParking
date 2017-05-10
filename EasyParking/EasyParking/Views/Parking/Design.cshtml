@@ -53,11 +53,11 @@
         @Html.ActionLink("Back to list", "Parkings", "Home")
     </div>
 </div>
-@if (!Model.Places.Any())
+@if (!Model.Places.Any())//constructing new layout
 {
     <div class="col-md-8" id="parking-layout"></div>
 }
-else
+else //showing exsistent layout
 {
     <div class="col-md-8" id="parking-layout">
         @await Component.InvokeAsync("ParkingLayout", new { moniker = Model.Moniker })
@@ -65,10 +65,9 @@ else
 }
 @section Scripts {
 
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); };
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
 }
-
-
 
 
 
