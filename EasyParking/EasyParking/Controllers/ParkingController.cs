@@ -62,7 +62,14 @@ namespace EasyParking.Controllers
             return BadRequest();
         }
 
+        [HttpGet("{moniker}", Name = "WorkPage")]
+        public IActionResult Work(string moniker)
+        {
+            var parking = _repo.GetParkingByMoniker(moniker);
 
+            
+            return View("WorkPage");
+        }
     }
 
 

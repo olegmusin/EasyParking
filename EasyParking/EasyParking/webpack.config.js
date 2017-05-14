@@ -4,13 +4,14 @@ var Path = require("path");
 module.exports = {
     entry: {
         site: [
-            "./scripts/app.ts"
+            "./Scripts/layoutPage.ts",
+            "./Scripts/workPage.ts"
         ]
 
     },
     output: {
         filename: "bundle.js",
-        path: Path.resolve(__dirname, "wwwroot/dist/")
+        path: Path.resolve(__dirname, "wwwroot/js/")
     },
     module: {
         rules: [

@@ -1,0 +1,30 @@
+﻿@model WorkPageViewModel
+
+@{
+    ViewData["Title"] = "Main work page";
+}
+
+<h2>Work shop</h2>
+<div class="row">
+    <div class="container-fluid">
+        <div class="form-group row">
+            <div class="col-md-3">
+                <label asp-for="VechicleNumber" class="control-label">Vechicle number:</label>
+                <input asp-for="VechicleNumber" class="form-control" placeholder="a001aa77"/>
+            </div>
+        
+            <div class="col-md-2">
+                <label asp-for="ParkingType" class="control-label">Parking type:</label>
+                <select asp-for="ParkingType"
+                        asp-items="Html.GetEnumSelectList<WorkPageViewModel.ParkingTypes>()"
+                        class="form-control"></select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row container-fluid">
+    <div class="parking-workpage col-md-12">
+        @await Component.InvokeAsync("ParkingLayout",
+               new { moniker = ViewContext.RouteData.Values["moniker"]})
+    </div>
+</div>

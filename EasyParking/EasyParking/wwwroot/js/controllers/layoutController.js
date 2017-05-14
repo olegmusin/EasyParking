@@ -1,6 +1,6 @@
 "use strict";
 var $ = require("jquery");
-var LayoutService = require("./layoutService");
+var LayoutService = require("../services/layoutService");
 var createBtn = $(".js-btn-layout");
 var saveBtn = $(".js-btn-save");
 var columns = $("#columns");
@@ -47,19 +47,20 @@ var LayoutController = (function () {
         createBtn.click(function (e) {
             var button = $(e.target);
             var parkingMoniker = button.attr("data-parking-moniker");
+            //re-initialize array to clear, if that's not first time creation of layout
+            places = new Array();
             LayoutService.createLayout(parkingMoniker, {
                 columns: columns.val(),
                 rows: rows.val()
             }, done);
-            //columns.val(1);
-            //rows.val(1);
         });
         saveBtn.click(function (e) {
             var button = $(e.target);
             var parkingMoniker = button.attr("data-parking-moniker");
             if (places.length === columns.val() * rows.val())
                 LayoutService.saveLayout(parkingMoniker, places, done);
-            bootbox.alert("Not all places are checked!");
+            else
+                bootbox.alert("Not all places are checked!", function () { return; });
         });
     };
     ;

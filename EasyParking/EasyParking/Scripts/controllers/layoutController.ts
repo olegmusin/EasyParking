@@ -1,6 +1,6 @@
 ﻿import * as $ from "jquery";
 
-import LayoutService = require("./layoutService");
+import LayoutService = require("../services/layoutService");
 declare var bootbox: any;
 
 
@@ -64,7 +64,8 @@ class LayoutController {
         createBtn.click(e => {
             let button = $(e.target);
             let parkingMoniker = button.attr("data-parking-moniker");
-            places = new Array<Place>(); //re-initialize array if not initial creation
+            //re-initialize array to clear, if that's not first time creation of layout
+            places = new Array<Place>(); 
             LayoutService.createLayout(
                 parkingMoniker,
                 {

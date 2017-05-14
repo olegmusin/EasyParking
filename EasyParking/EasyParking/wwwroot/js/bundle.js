@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10333,20 +10333,26 @@ return jQuery;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var controller = __webpack_require__(2);
+var lc = __webpack_require__(3);
 var container = $("#parking-layout");
-controller.LayoutController.init(container);
+lc.LayoutController.init(container);
 
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var $ = __webpack_require__(0);
-var LayoutService = __webpack_require__(3);
+var LayoutService = __webpack_require__(4);
 var createBtn = $(".js-btn-layout");
 var saveBtn = $(".js-btn-save");
 var columns = $("#columns");
@@ -10393,7 +10399,8 @@ var LayoutController = (function () {
         createBtn.click(function (e) {
             var button = $(e.target);
             var parkingMoniker = button.attr("data-parking-moniker");
-            places = new Array(); //re-initialize array if not initial creation
+            //re-initialize array to clear, if that's not first time creation of layout
+            places = new Array();
             LayoutService.createLayout(parkingMoniker, {
                 columns: columns.val(),
                 rows: rows.val()
@@ -10415,7 +10422,7 @@ exports.LayoutController = LayoutController;
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10442,10 +10449,11 @@ exports.saveLayout = saveLayout;
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(1);
+__webpack_require__(1);
+module.exports = __webpack_require__(2);
 
 
 /***/ })

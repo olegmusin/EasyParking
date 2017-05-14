@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./wwwroot/build/",
+    "outDir": "./wwwroot/js/",
     "noImplicitAny": false,
     "noEmitOnError": true,
     "removeComments": false,
@@ -10,8 +10,9 @@
     "moduleResolution": "node"
   },
   "files": [
-    "Scripts/app.ts",
-    "Scripts/layoutController.ts",
-    "Scripts/layoutService.ts"
+    "Scripts/layoutPage.ts",
+    "Scripts/workPage.ts",
+    "Scripts/controllers/layoutController.ts",
+    "Scripts/services/layoutService.ts"
   ]
 }
