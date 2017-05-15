@@ -1,6 +1,6 @@
 ﻿
-import * as lc from "./controllers/layoutController";
+import LayoutController = require("./controllers/layoutController");
 
 var container = $("#parking-layout");
 
-lc.LayoutController.init(container);
+LayoutController.init(container);

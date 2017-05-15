@@ -11,8 +11,6 @@
   },
   "files": [
     "Scripts/layoutPage.ts",
-    "Scripts/workPage.ts",
-    "Scripts/controllers/layoutController.ts",
-    "Scripts/services/layoutService.ts"
+    "Scripts/workPage.ts"
   ]
 }

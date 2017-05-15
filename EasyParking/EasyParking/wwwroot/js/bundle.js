@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10333,9 +10333,9 @@ return jQuery;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var lc = __webpack_require__(3);
+var LayoutController = __webpack_require__(3);
 var container = $("#parking-layout");
-lc.LayoutController.init(container);
+LayoutController.init(container);
 
 
 /***/ }),
@@ -10350,37 +10350,14 @@ lc.LayoutController.init(container);
 
 "use strict";
 
-Object.defineProperty(exports, "__esModule", { value: true });
 var $ = __webpack_require__(0);
 var LayoutService = __webpack_require__(4);
+var Place = __webpack_require__(5);
 var createBtn = $(".js-btn-layout");
 var saveBtn = $(".js-btn-save");
 var columns = $("#columns");
 var rows = $("#rows");
 var places = new Array();
-var Place = (function () {
-    function Place(placeBtn) {
-        this.activeBtn = placeBtn;
-        this.row = placeBtn.attr("data-row");
-        this.column = placeBtn.attr("data-column");
-        this.isParkingAllowed = placeBtn.hasClass("lot");
-    }
-    Place.prototype.toggleAppearence = function () {
-        var _this = this;
-        if (this.activeBtn.hasClass("lot"))
-            this.activeBtn.removeClass("lot").addClass("lane").text("L");
-        else
-            this.activeBtn.addClass("lot").removeClass("lane").text("P");
-        this.isParkingAllowed = this.activeBtn.hasClass("lot");
-        places.push(this);
-        places = $.grep(places, function (el) {
-            return (el.row === _this.row && el.column === _this.column);
-        }, true);
-        places.push(this);
-    };
-    return Place;
-}());
-exports.Place = Place;
 var LayoutController = (function () {
     function LayoutController() {
     }
@@ -10388,14 +10365,26 @@ var LayoutController = (function () {
         $(".js-btn-lot").each(function (idx, elem) {
             places.push(new Place($(elem)));
         });
-        container.on("click", ".js-btn-lot", function (e) {
-            e.stopPropagation();
-            var place = new Place($(e.target));
-            place.toggleAppearence();
-        });
+        var toggleAppearence = function (place) {
+            if (place.activeBtn.hasClass("lot"))
+                place.activeBtn.removeClass("lot").addClass("lane").text("L");
+            else
+                place.activeBtn.addClass("lot").removeClass("lane").text("P");
+            place.isParkingAllowed = place.activeBtn.hasClass("lot");
+            places.push(place);
+            places = $.grep(places, function (el) {
+                return (el.row === place.row && el.column === place.column);
+            }, true);
+            places.push(place);
+        };
         var done = function (data) {
             container.html(data);
         };
+        container.on("click", ".js-btn-lot", function (e) {
+            e.stopPropagation();
+            var place = new Place($(e.target));
+            toggleAppearence(place);
+        });
         createBtn.click(function (e) {
             var button = $(e.target);
             var parkingMoniker = button.attr("data-parking-moniker");
@@ -10418,7 +10407,7 @@ var LayoutController = (function () {
     ;
     return LayoutController;
 }());
-exports.LayoutController = LayoutController;
+module.exports = LayoutController;
 
 
 /***/ }),
@@ -10450,6 +10439,24 @@ exports.saveLayout = saveLayout;
 
 /***/ }),
 /* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Place = (function () {
+    function Place(placeBtn) {
+        this.activeBtn = placeBtn;
+        this.row = placeBtn.attr("data-row");
+        this.column = placeBtn.attr("data-column");
+        this.isParkingAllowed = placeBtn.hasClass("lot");
+    }
+    return Place;
+}());
+module.exports = Place;
+
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
