@@ -23,7 +23,7 @@
     </div>
 </div>
 <div class="row container-fluid">
-    <div class="parking-workpage col-md-12">
+    <div class="col-md-12" id="parking-workpage">
         @await Component.InvokeAsync("ParkingLayout",
                new { moniker = ViewContext.RouteData.Values["moniker"]})
     </div>

@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10332,16 +10332,30 @@ return jQuery;
 
 "use strict";
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var LayoutController = __webpack_require__(3);
-var container = $("#parking-layout");
-LayoutController.init(container);
+var Place = (function () {
+    function Place(placeBtn) {
+        this.activeBtn = placeBtn;
+        this.row = placeBtn.attr("data-row");
+        this.column = placeBtn.attr("data-column");
+        this.isParkingAllowed = placeBtn.hasClass("lot");
+        this.booked = placeBtn.hasClass("booked");
+        this.occupied = placeBtn.hasClass("occupied");
+    }
+    return Place;
+}());
+module.exports = Place;
 
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var LayoutController = __webpack_require__(4);
+var container = $("#parking-layout");
+LayoutController.init(container);
 
 
 /***/ }),
@@ -10350,9 +10364,21 @@ LayoutController.init(container);
 
 "use strict";
 
+Object.defineProperty(exports, "__esModule", { value: true });
+var WorkshopController = __webpack_require__(5);
+var container = $("#parking-workpage");
+WorkshopController.init(container);
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 var $ = __webpack_require__(0);
-var LayoutService = __webpack_require__(4);
-var Place = __webpack_require__(5);
+var LayoutService = __webpack_require__(6);
+var Place = __webpack_require__(1);
 var createBtn = $(".js-btn-layout");
 var saveBtn = $(".js-btn-save");
 var columns = $("#columns");
@@ -10388,7 +10414,6 @@ var LayoutController = (function () {
         createBtn.click(function (e) {
             var button = $(e.target);
             var parkingMoniker = button.attr("data-parking-moniker");
-            //re-initialize array to clear, if that's not first time creation of layout
             places = new Array();
             LayoutService.createLayout(parkingMoniker, {
                 columns: columns.val(),
@@ -10411,7 +10436,40 @@ module.exports = LayoutController;
 
 
 /***/ }),
-/* 4 */
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__(0);
+var Place = __webpack_require__(1);
+var places = new Array();
+var WorkshopController = (function () {
+    function WorkshopController() {
+    }
+    WorkshopController.init = function (container) {
+        $(".js-btn-lot").each(function (idx, elem) {
+            places.push(new Place($(elem)));
+        });
+        var parkIt = function (place) {
+            if (place.activeBtn.hasClass("lane"))
+                return;
+            else
+                place.activeBtn.toggleClass("occupied").toggle("O");
+        };
+        container.on("click", ".js-btn-lot", function (e) {
+            e.stopPropagation();
+            var place = new Place($(e.target));
+            parkIt(place);
+        });
+    };
+    return WorkshopController;
+}());
+module.exports = WorkshopController;
+
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10438,29 +10496,11 @@ exports.saveLayout = saveLayout;
 
 
 /***/ }),
-/* 5 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-var Place = (function () {
-    function Place(placeBtn) {
-        this.activeBtn = placeBtn;
-        this.row = placeBtn.attr("data-row");
-        this.column = placeBtn.attr("data-column");
-        this.isParkingAllowed = placeBtn.hasClass("lot");
-    }
-    return Place;
-}());
-module.exports = Place;
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(1);
-module.exports = __webpack_require__(2);
+__webpack_require__(2);
+module.exports = __webpack_require__(3);
 
 
 /***/ })

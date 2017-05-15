@@ -37,7 +37,6 @@ var LayoutController = (function () {
         createBtn.click(function (e) {
             var button = $(e.target);
             var parkingMoniker = button.attr("data-parking-moniker");
-            //re-initialize array to clear, if that's not first time creation of layout
             places = new Array();
             LayoutService.createLayout(parkingMoniker, {
                 columns: columns.val(),
