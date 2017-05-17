@@ -1,21 +1,27 @@
 ﻿import * as $ from "jquery";
 
-function createLayout(parkingMoniker, size, done) {
+class LayoutService {
 
-    $.get(`/api/parking/${parkingMoniker}/CreateLayout/`, size)
-        .done(done);
 
-};
+    static createLayout(parkingMoniker, size, done) {
 
-function saveLayout(parkingMoniker, places, done) {
+        $.get(`/api/parking/${parkingMoniker}/CreateLayout/`, size)
+            .done(done);
 
-    $.ajax({
-        url: `/api/parking/${parkingMoniker}/SaveLayout`,
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(places),
-        success: done
-    });
-};
+    };
 
-export { createLayout, saveLayout }
+
+    static saveLayout(parkingMoniker, places, done) {
+
+        $.ajax({
+            url: `/api/parking/${parkingMoniker}/SaveLayout`,
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(places),
+            success: done
+        });
+    };
+
+}
+
+export = LayoutService;

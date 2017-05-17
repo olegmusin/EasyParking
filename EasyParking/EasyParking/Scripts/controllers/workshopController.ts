@@ -16,9 +16,12 @@ class WorkshopController {
         var parkIt = (place: Place) => {
 
             if (place.activeBtn.hasClass("lane")) return;
-            else 
-                place.activeBtn.toggleClass("occupied");
-            
+            else
+                place.activeBtn
+                    .toggleClass("lot")
+                    .toggleClass("occupied")
+                    .text((i, text) => text === "O" ? "P" : "O");
+
         }
 
         container.on("click", ".js-btn-lot",

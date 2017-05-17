@@ -9,6 +9,7 @@ using EasyParking.Dtos;
 using EasyParking.Filters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Extensions.Logging;
 
 namespace EasyParking.Controllers.Api
@@ -72,5 +73,23 @@ namespace EasyParking.Controllers.Api
             return BadRequest();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> ParkVechicle([FromBody] PlaceDto place, string moniker, string number)
+        {
+            var parking = _repo.GetParkingByMoniker(moniker);
+            var lot = _repo.GetPlaceForParking(place.Row, place.Column, parking.Id);
+
+            _repo.CreateNewVechicle(number); 
+
+            if (lot.Booked || lot.Occupied) return BadRequest("Place is busy or booked, choose another one!");
+
+            lot.Occupied = true;
+            _repo.Update(lot);
+
+            if (await _repo.SaveAsync())
+                _logger.LogInformation($"Parking lot {place.Row},{place.Column} for {moniker} occupied by vechicle {number}");
+            return Ok();
+
+        }
     }
 }

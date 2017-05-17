@@ -10455,7 +10455,10 @@ var WorkshopController = (function () {
             if (place.activeBtn.hasClass("lane"))
                 return;
             else
-                place.activeBtn.toggleClass("occupied").toggle("O");
+                place.activeBtn
+                    .toggleClass("lot")
+                    .toggleClass("occupied")
+                    .text(function (i, text) { return text === "O" ? "P" : "O"; });
         };
         container.on("click", ".js-btn-lot", function (e) {
             e.stopPropagation();
@@ -10474,25 +10477,28 @@ module.exports = WorkshopController;
 
 "use strict";
 
-Object.defineProperty(exports, "__esModule", { value: true });
 var $ = __webpack_require__(0);
-function createLayout(parkingMoniker, size, done) {
-    $.get("/api/parking/" + parkingMoniker + "/CreateLayout/", size)
-        .done(done);
-}
-exports.createLayout = createLayout;
-;
-function saveLayout(parkingMoniker, places, done) {
-    $.ajax({
-        url: "/api/parking/" + parkingMoniker + "/SaveLayout",
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(places),
-        success: done
-    });
-}
-exports.saveLayout = saveLayout;
-;
+var LayoutService = (function () {
+    function LayoutService() {
+    }
+    LayoutService.createLayout = function (parkingMoniker, size, done) {
+        $.get("/api/parking/" + parkingMoniker + "/CreateLayout/", size)
+            .done(done);
+    };
+    ;
+    LayoutService.saveLayout = function (parkingMoniker, places, done) {
+        $.ajax({
+            url: "/api/parking/" + parkingMoniker + "/SaveLayout",
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(places),
+            success: done
+        });
+    };
+    ;
+    return LayoutService;
+}());
+module.exports = LayoutService;
 
 
 /***/ }),

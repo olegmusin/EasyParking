@@ -13,7 +13,10 @@ var WorkshopController = (function () {
             if (place.activeBtn.hasClass("lane"))
                 return;
             else
-                place.activeBtn.toggleClass("occupied").toggle("O");
+                place.activeBtn
+                    .toggleClass("lot")
+                    .toggleClass("occupied")
+                    .text(function (i, text) { return text === "O" ? "P" : "O"; });
         };
         container.on("click", ".js-btn-lot", function (e) {
             e.stopPropagation();

@@ -1,8 +1,9 @@
 ﻿using System.Threading.Tasks;
+using EasyParking.Domain.Entities;
 
 namespace EasyParking.Domain.Abstract
 {
-    public interface IRepository : IReadRepository, IParkingsRepository
+    public interface IRepository : IReadRepository, IParkingsRepository, IPlaceRepository, IVechicleRepository
     {
         void Create<TEntity>(TEntity entity, string createdBy = null)
         where TEntity : class, IEntity;
@@ -19,5 +20,6 @@ namespace EasyParking.Domain.Abstract
         void Save();
 
         Task<bool> SaveAsync();
+       
     }
 }

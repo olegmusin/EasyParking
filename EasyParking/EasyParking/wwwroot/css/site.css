@@ -44,3 +44,8 @@
     height: 33px;
     background-color: gray; 
 }
+.occupied {
+    width: 33px;
+    height: 33px;
+    background-color: orange;  
+}
