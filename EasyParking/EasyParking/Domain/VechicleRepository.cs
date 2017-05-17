@@ -14,7 +14,7 @@ namespace EasyParking.Domain
             return GetOne<Vehicle>(v => v.Number == number);
         }
 
-        public async Task<Vehicle> CreateNewVechicle(string number)
+        public async Task<Vehicle> GetCreateVechicle(string number)
         {
             var car = GetVechiclebyNumber(number);
             if (car == null)

@@ -10,6 +10,6 @@ namespace EasyParking.Domain.Abstract
     public interface IVechicleRepository
     {
         Vehicle GetVechiclebyNumber(string number);
-        Task<Vehicle> CreateNewVechicle(string number);
+        Task<Vehicle> GetCreateVechicle(string number);
     }
 }

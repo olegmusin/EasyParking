@@ -74,12 +74,15 @@ namespace EasyParking.Controllers.Api
         }
 
         [HttpPost]
-        public async Task<IActionResult> ParkVechicle([FromBody] PlaceDto place, string moniker, string number)
+        public async Task<IActionResult> ParkVechicle(
+            [FromBody] PlaceDto place,
+            string moniker,
+            [FromBody] string number)
         {
             var parking = _repo.GetParkingByMoniker(moniker);
             var lot = _repo.GetPlaceForParking(place.Row, place.Column, parking.Id);
 
-            _repo.CreateNewVechicle(number); 
+            _repo.GetCreateVechicle(number).Wait(); 
 
             if (lot.Booked || lot.Occupied) return BadRequest("Place is busy or booked, choose another one!");
 

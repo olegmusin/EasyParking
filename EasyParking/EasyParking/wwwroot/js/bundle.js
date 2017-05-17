@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10443,6 +10443,7 @@ module.exports = LayoutController;
 
 var $ = __webpack_require__(0);
 var Place = __webpack_require__(1);
+var ParkingService = __webpack_require__(7);
 var places = new Array();
 var WorkshopController = (function () {
     function WorkshopController() {
@@ -10460,10 +10461,17 @@ var WorkshopController = (function () {
                     .toggleClass("occupied")
                     .text(function (i, text) { return text === "O" ? "P" : "O"; });
         };
+        var done = function () {
+            bootbox.alert("Parked!");
+        };
         container.on("click", ".js-btn-lot", function (e) {
+            var carNumber = $("#carNumber").val();
             e.stopPropagation();
-            var place = new Place($(e.target));
+            var button = $(e.target);
+            var parkingMoniker = button.attr("data-parking-moniker");
+            var place = new Place(button);
             parkIt(place);
+            ParkingService.parkVechicle(parkingMoniker, place, carNumber, done);
         });
     };
     return WorkshopController;
@@ -10503,6 +10511,30 @@ module.exports = LayoutService;
 
 /***/ }),
 /* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__(0);
+var ParkingService = (function () {
+    function ParkingService() {
+    }
+    ParkingService.parkVechicle = function (parkingMoniker, place, carNumber, done) {
+        $.ajax({
+            url: "/api/parking/" + parkingMoniker + "/ParkVechicle",
+            type: 'POST',
+            contentType: 'application/json',
+            data: { place: JSON.stringify(place), number: carNumber },
+            success: done
+        });
+    };
+    return ParkingService;
+}());
+module.exports = ParkingService;
+
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(2);

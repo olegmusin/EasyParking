@@ -14,7 +14,7 @@ namespace EasyParking.ViewModels
             PerNight = 2
         }
 
-        public string VechicleNumber { get; set; }
+        public string VehicleNumber { get; set; }
         public ParkingTypes ParkingType { get; set; }
 
       
