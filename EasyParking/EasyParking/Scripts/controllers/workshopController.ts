@@ -30,14 +30,21 @@ class WorkshopController {
         }
         container.on("click", ".js-btn-lot",
             e => {
-                var carNumber = $("#carNumber").val();
+                            
                 e.stopPropagation();
+
+                let carNumber = $("#carNumber").val();
                 let button = $(e.target);
-                let parkingMoniker = button.attr("data-parking-moniker");
+                let parkingMoniker = (window.location.pathname).split("/")[3];
+
                 var place = new Place(button);
                 parkIt(place);
+
                 ParkingService.parkVechicle(parkingMoniker,
-                    place,
+                    {
+                        row: place.row,
+                        colomn: place.column
+                    },
                     carNumber,
                     done
                 );

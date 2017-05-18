@@ -9,8 +9,8 @@
     <div class="container-fluid">
         <div class="form-group row">
             <div class="col-md-3">
-                <label asp-for="VehicleNumber" class="control-label" id="carNumber">Vechicle number:</label>
-                <input asp-for="VehicleNumber" class="form-control" placeholder="a001aa77"/>
+                <label asp-for="VehicleNumber" class="control-label">Vechicle number:</label>
+                <input asp-for="VehicleNumber" class="form-control" placeholder="a001aa77" id="carNumber"/>
             </div>
         
             <div class="col-md-2">
@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-</div
+</div>
 <div class="row container-fluid">
     <div class="col-md-12" id="parking-workpage">
         @await Component.InvokeAsync("ParkingLayout",

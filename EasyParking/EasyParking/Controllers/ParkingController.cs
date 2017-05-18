@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -19,7 +18,7 @@ namespace EasyParking.Controllers
     {
         private readonly ILogger<ParkingController> _logger;
         private readonly IRepository _repo;
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
 
 
         public ParkingController(ILogger<ParkingController> logger, IRepository repo, IMapper mapper)

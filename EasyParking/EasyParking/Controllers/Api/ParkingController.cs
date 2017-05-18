@@ -7,9 +7,7 @@ using EasyParking.Domain.Abstract;
 using EasyParking.Domain.Entities;
 using EasyParking.Dtos;
 using EasyParking.Filters;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Extensions.Logging;
 
 namespace EasyParking.Controllers.Api
@@ -21,7 +19,7 @@ namespace EasyParking.Controllers.Api
     {
         private readonly ILogger<Controllers.ParkingController> _logger;
         private readonly IRepository _repo;
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
 
 
         public ParkingController(ILogger<Controllers.ParkingController> logger, IRepository repo, IMapper mapper)
@@ -74,10 +72,7 @@ namespace EasyParking.Controllers.Api
         }
 
         [HttpPost]
-        public async Task<IActionResult> ParkVechicle(
-            [FromBody] PlaceDto place,
-            string moniker,
-            [FromBody] string number)
+        public async Task<IActionResult> ParkVechicle([FromBody]PlaceDto place, [FromQuery]string number, string moniker)
         {
             var parking = _repo.GetParkingByMoniker(moniker);
             var lot = _repo.GetPlaceForParking(place.Row, place.Column, parking.Id);

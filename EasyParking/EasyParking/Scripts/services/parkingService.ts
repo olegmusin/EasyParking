@@ -2,17 +2,17 @@
 
 class ParkingService {
 
-static parkVechicle(parkingMoniker, place, carNumber, done) {
+    static parkVechicle(parkingMoniker, place, carNumber, done) {
 
-    $.ajax({
-        url: `/api/parking/${parkingMoniker}/ParkVechicle`,
-        type: 'POST',
-        contentType: 'application/json',
-        data: { place: JSON.stringify(place), number: carNumber },
-        success: done
-    });
+        $.ajax({
+            url: `/api/parking/${parkingMoniker}/ParkVechicle`,
+            type: 'POST',
+            contentType: 'application/json',
+            data: { place: JSON.stringify(place), number: carNumber },
+            success: done
+        });
 
-}
+    }
 
 }
 
