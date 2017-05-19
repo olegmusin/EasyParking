@@ -10467,13 +10467,17 @@ var WorkshopController = (function () {
         container.on("click", ".js-btn-lot", function (e) {
             e.stopPropagation();
             var carNumber = $("#carNumber").val();
+            if (carNumber === "") {
+                $("form").submit();
+                return;
+            }
             var button = $(e.target);
             var parkingMoniker = (window.location.pathname).split("/")[3];
             var place = new Place(button);
             parkIt(place);
             ParkingService.parkVechicle(parkingMoniker, {
                 row: place.row,
-                colomn: place.column
+                column: place.column
             }, carNumber, done);
         });
     };
@@ -10524,10 +10528,10 @@ var ParkingService = (function () {
     }
     ParkingService.parkVechicle = function (parkingMoniker, place, carNumber, done) {
         $.ajax({
-            url: "/api/parking/" + parkingMoniker + "/ParkVechicle",
+            url: "/api/parking/" + parkingMoniker + "/ParkVechicle/" + carNumber,
             type: 'POST',
             contentType: 'application/json',
-            data: { place: JSON.stringify(place), number: carNumber },
+            data: JSON.stringify(place),
             success: done
         });
     };

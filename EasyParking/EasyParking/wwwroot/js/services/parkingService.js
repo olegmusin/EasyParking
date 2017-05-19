@@ -5,10 +5,10 @@ var ParkingService = (function () {
     }
     ParkingService.parkVechicle = function (parkingMoniker, place, carNumber, done) {
         $.ajax({
-            url: "/api/parking/" + parkingMoniker + "/ParkVechicle",
+            url: "/api/parking/" + parkingMoniker + "/ParkVechicle/" + carNumber,
             type: 'POST',
             contentType: 'application/json',
-            data: { place: JSON.stringify(place), number: carNumber },
+            data: JSON.stringify(place),
             success: done
         });
     };

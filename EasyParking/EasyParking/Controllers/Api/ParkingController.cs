@@ -71,8 +71,8 @@ namespace EasyParking.Controllers.Api
             return BadRequest();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> ParkVechicle([FromBody]PlaceDto place, [FromQuery]string number, string moniker)
+        [HttpPost("{number}")]
+        public async Task<IActionResult> ParkVechicle([FromBody]PlaceDto place, string number, string moniker)
         {
             var parking = _repo.GetParkingByMoniker(moniker);
             var lot = _repo.GetPlaceForParking(place.Row, place.Column, parking.Id);

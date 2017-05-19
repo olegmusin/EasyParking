@@ -25,13 +25,17 @@ var WorkshopController = (function () {
         container.on("click", ".js-btn-lot", function (e) {
             e.stopPropagation();
             var carNumber = $("#carNumber").val();
+            if (carNumber === "") {
+                $("form").submit();
+                return;
+            }
             var button = $(e.target);
             var parkingMoniker = (window.location.pathname).split("/")[3];
             var place = new Place(button);
             parkIt(place);
             ParkingService.parkVechicle(parkingMoniker, {
                 row: place.row,
-                colomn: place.column
+                column: place.column
             }, carNumber, done);
         });
     };

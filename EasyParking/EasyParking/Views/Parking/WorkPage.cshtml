@@ -6,25 +6,36 @@
 
 <h2>Work shop</h2>
 <div class="row">
-    <div class="container-fluid">
-        <div class="form-group row">
+    <form class="container-fluid">
+      <div class="form-group row">
             <div class="col-md-3">
                 <label asp-for="VehicleNumber" class="control-label">Vechicle number:</label>
                 <input asp-for="VehicleNumber" class="form-control" placeholder="a001aa77" id="carNumber"/>
+                <span asp-validation-for="VehicleNumber" class="text-danger"></span>
             </div>
-        
+
             <div class="col-md-2">
                 <label asp-for="ParkingType" class="control-label">Parking type:</label>
                 <select asp-for="ParkingType"
                         asp-items="Html.GetEnumSelectList<WorkPageViewModel.ParkingTypes>()"
                         class="form-control"></select>
+                <span asp-validation-for="ParkingType" class="text-danger"></span>
             </div>
+            <div class="col-md-2">
+                <label asp-for="Hours" class="control-label">Estimated hours</label>
+                <input asp-for="Hours" class="form-control" id="time"/>
+                <span asp-validation-for="Hours" class="text-danger"></span>
+            </div>
+
         </div>
-    </div>
+    </form>
 </div>
 <div class="row container-fluid">
     <div class="col-md-12" id="parking-workpage">
         @await Component.InvokeAsync("ParkingLayout",
-               new { moniker = ViewContext.RouteData.Values["moniker"]})
+            new { moniker = ViewContext.RouteData.Values["moniker"]})
     </div>
 </div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

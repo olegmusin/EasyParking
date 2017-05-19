@@ -34,6 +34,10 @@ class WorkshopController {
                 e.stopPropagation();
 
                 let carNumber = $("#carNumber").val();
+                if (carNumber === "") {
+                    return;
+                }
+                
                 let button = $(e.target);
                 let parkingMoniker = (window.location.pathname).split("/")[3];
 
@@ -43,7 +47,7 @@ class WorkshopController {
                 ParkingService.parkVechicle(parkingMoniker,
                     {
                         row: place.row,
-                        colomn: place.column
+                        column: place.column
                     },
                     carNumber,
                     done
